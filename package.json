@@ -1,0 +1,28 @@
+{
+  "name": "retrious",
+  "version": "0.0.1",
+  "description": "Promise-based retry workflow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/y13i/retrious.git"
+  },
+  "keywords": [
+    "retry",
+    "promise",
+    "backoff"
+  ],
+  "author": {
+    "name": "Yoriki Yamaguchi",
+    "email": "email@y13i.com",
+    "url": "https://y13i.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/y13i/retrious/issues"
+  },
+  "homepage": "https://github.com/y13i/retrious#readme"
+}
