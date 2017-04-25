@@ -4,7 +4,14 @@
   "description": "Promise-based retry workflow.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npm run lint && tsc --project tsconfig.dist.json",
+    "postpublish": "npm run clean",
+    "pretest": "tsc",
+    "test": "ava",
+    "posttest": "npm run clean",
+    "clean": "rm -rf dist lib/*.d.ts lib/*.js lib/*.js.map test/*.d.ts test/*.js test/*.js.map",
+    "lint": "tslint lib/**/*.ts test/**/*.ts --exclude *.d.ts",
+    "document": "typedoc --out docs"
   },
   "repository": {
     "type": "git",
@@ -24,5 +31,11 @@
   "bugs": {
     "url": "https://github.com/y13i/retrious/issues"
   },
-  "homepage": "https://github.com/y13i/retrious#readme"
+  "homepage": "https://github.com/y13i/retrious#readme",
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "tslint": "^5.1.0",
+    "typedoc": "^0.5.10",
+    "typescript": "^2.2.2"
+  }
 }
