@@ -1,6 +1,6 @@
 import test from "ava";
-import retrious from "../lib";
+import retryx from "../lib/retryx";
 
-test("`retrious` is a function", t => {
-  t.is(typeof retrious, "function");
+test("`retryx` is a function", t => {
+  t.is(typeof retryx, "function");
 });

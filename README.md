@@ -1,1 +1,1 @@
-# retrious
+# retryx - Promise-based retry workflow

@@ -1,1 +1,1 @@
-export {default} from "./retrious";
+export {default} from "./retryx";
