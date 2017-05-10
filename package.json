@@ -4,7 +4,7 @@
   "description": "Promise-based retry workflow.",
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm run lint && tsc --project tsconfig.dist.json",
+    "prepublish": "npm test && npm run lint && tsc --project tsconfig.dist.json",
     "postpublish": "npm run clean",
     "pretest": "tsc",
     "test": "ava",
