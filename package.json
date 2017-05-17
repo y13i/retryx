@@ -7,11 +7,13 @@
     "prepublish": "npm test && npm run lint && tsc --project tsconfig.dist.json",
     "postpublish": "npm run clean",
     "pretest": "tsc",
-    "test": "ava",
+    "start": "npm run watch",
+    "test": "nyc ava",
     "posttest": "npm run clean",
     "clean": "rm -rf dist lib/*.d.ts lib/*.js lib/*.js.map test/*.d.ts test/*.js test/*.js.map",
     "lint": "tslint lib/**/*.ts test/**/*.ts --exclude *.d.ts",
-    "docs": "typedoc --out docs"
+    "docs": "typedoc --out docs",
+    "watch": "tsc && concurrently --raw --kill-others 'tsc --watch' 'ava --watch'"
   },
   "repository": {
     "type": "git",
@@ -34,8 +36,11 @@
   "homepage": "https://github.com/y13i/retryx#readme",
   "devDependencies": {
     "ava": "^0.19.1",
-    "tslint": "^5.1.0",
-    "typedoc": "^0.5.10",
-    "typescript": "^2.2.2"
+    "concurrently": "^3.4.0",
+    "coveralls": "^2.13.1",
+    "nyc": "^10.3.2",
+    "tslint": "^5.2.0",
+    "typedoc": "^0.7.0",
+    "typescript": "^2.3.2"
   }
 }
