@@ -1,7 +1,7 @@
 {
   "name": "retryx",
   "version": "0.0.1",
-  "description": "Promise-based retry workflow.",
+  "description": "Promise-based retry workflow library.",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm test && npm run lint && tsc --project tsconfig.dist.json",
