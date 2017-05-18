@@ -8,3 +8,6 @@ node_modules
 !/index.d.ts
 
 dist/
+
+.nyc_output
+coverage
