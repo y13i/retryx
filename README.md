@@ -17,7 +17,7 @@ $ npm install --save retryx
 
 ### Flowchart
 
-![retryx flowchart](docs/diagram.svg)
+![retryx flowchart](docs/diagram.png)
 
 ### API
 
