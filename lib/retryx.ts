@@ -1,4 +1,8 @@
-export async function retryx() {
+import Executor, {MainFunction, ExecutorOptions} from "./executor";
+
+export function retryx<T>(main: MainFunction<T>, options?: ExecutorOptions, ...args: any[]): Promise<T> {
+  const executor = new Executor<T>(main, options);
+  return executor.execute(...args);
 }
 
 export default retryx;
