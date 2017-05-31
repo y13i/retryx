@@ -179,3 +179,20 @@ test("accept args to main function", async t => {
   const executor2 = new Executor((...args: any[]) => Promise.resolve([...args]));
   t.deepEqual(await executor2.execute("TEST", 123), ["TEST", 123]);
 });
+
+test("exponential backoff from 100ms by default", async t => {
+  const startTime = Date.now();
+
+  const executor = new Executor(() => {
+    return Promise.reject("impossible");
+  });
+
+  await t.throws(executor.execute());
+
+  const endTime = Date.now();
+
+  // 1st -> 100ms -> 2nd -> 400ms -> 3rd -> 900ms -> 4th -> 1600ms -> 5th -> reject
+  // 100 + 400 + 900 + 1600 == 3000 (ms)
+  t.true(endTime - startTime > 3000);
+  t.true(endTime - startTime < 3200);
+});
