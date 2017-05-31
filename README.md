@@ -27,26 +27,78 @@ $ npm install --save retryx
 retryx(main, options, ...args)
 ```
 
-**Required** `main` is a function returns Promise that might be rejected.
+`main` is a function returns Promise that might be rejected. **Required**
 
-**Optional** `options` is a object contains `maxTries`, `waiter` and other hooks.
+`options` is a object contains `maxTries`, `waiter` and other hooks. **Optional**
 
-**Optional** `args` will be passed to main function call.
+`...args` will be passed to main function call. **Optional**
 
 #### `options`
 
 ```javascript
 {
-  maxTries?:       number,       // Attempts calling main function specified times or until succeeds. default: 5
-  waiter?:         HookFunction, // Wait function between each try. default: exponential, 100ms, 400ms, 900ms, 1600ms and so on
-  retryCondition?: HookFunction, // Abandon retrying if it returns falsy value. default: always true
-  beforeTry?:      HookFunction, // Called BEFORE each try. default: nothing to do
-  afterTry?:       HookFunction, // Called AFTER each try. default: nothing to do
-  beforeWait?:     HookFunction, // Called BEFORE each wait. default: nothing to do
-  afterWait?:      HookFunction, // Called AFTER each wait. default: nothing to do
-  doFinally?:      HookFunction, // Called ONCE whether main function resolved or rejected. default: nothing to do
+  maxTries:       number,
+  waiter:         HookFunction, 
+  retryCondition: HookFunction,
+  beforeTry:      HookFunction,
+  afterTry:       HookFunction,
+  beforeWait:     HookFunction,
+  afterWait:      HookFunction,
+  doFinally:      HookFunction,
 }
 ```
+
+`HookFunction` can receive current try count and last reject reason as arguments. See [source](lib/executor.ts#L4).
+
+##### `maxTries`
+
+Attempts calling main function specified times or until succeeds.
+
+default: 5
+
+##### `waiter`
+
+Hook function called before each retry. It's meant to return a Promise that resolves after specific duration.
+
+default: exponential backoff. 100ms, 400ms, 900ms, 1600ms and so on.
+
+See [default waiter implementation](lib/executor.ts#L24). You can create custom waiter with [wait function](lib/wait.ts) for shorthand.
+
+##### `retryCondition`
+
+Hook function called AFTER each try. If it returns falsy value, retrying will be abandoned even not reaching `maxTries`.
+
+default: always return true
+
+##### `beforeTry`
+
+Hook function called BEFORE each try.
+
+default: nothing to do
+
+##### `afterTry`
+
+Hook function called AFTER each try.
+
+default: nothing to do
+
+##### `beforeWait`
+
+Hook function called BEFORE each wait.
+
+default: nothing to do
+
+##### `afterWait`
+
+Hook function called AFTER each wait.
+
+default: nothing to do
+
+##### `doFinally`
+
+Hook function called ONCE whether main function resolved or rejected.
+
+default: nothing to do
 
 ### Examples
 
