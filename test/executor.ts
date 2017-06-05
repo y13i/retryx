@@ -1,5 +1,5 @@
 import test from "ava";
-import {spy} from "sinon";
+import {spy, assert} from "sinon";
 import Executor from "../lib/executor";
 import wait from "../lib/wait";
 
@@ -171,13 +171,30 @@ test("accept doFinally hook via options", async t => {
   t.is(await t.throws(executor2.execute()), 2);
   t.true(spy1.calledOnce);
   t.true(spy2.calledOnce);
+
+  const spy3 = spy();
+  const spy4 = spy();
+  const spy5 = spy();
+
+  const executor3 = new Executor(() => {
+    spy3("in-main");
+    return Promise.resolve(33);
+  }, {
+    doFinally: () => spy4("doFinally"),
+  });
+
+  const result3 = await executor3.execute();
+  spy5("after retryx");
+
+  t.is(result3, 33);
+  assert.callOrder(spy3, spy4, spy5);
 });
 
 test("accept args to main function", async t => {
-  const executor1 = new Executor(arg => Promise.resolve(arg));
-  t.is(await executor1.execute("test!"), "test!");
-  const executor2 = new Executor((...args: any[]) => Promise.resolve([...args]));
-  t.deepEqual(await executor2.execute("TEST", 123), ["TEST", 123]);
+  const executor1 = new Executor(arg => Promise.resolve(arg), undefined, "test!");
+  t.is(await executor1.execute(), "test!");
+  const executor2 = new Executor((...args: any[]) => Promise.resolve([...args]), undefined, "TEST", 123);
+  t.deepEqual(await executor2.execute(), ["TEST", 123]);
 });
 
 test("exponential backoff from 100ms by default", async t => {
@@ -195,4 +212,24 @@ test("exponential backoff from 100ms by default", async t => {
   // 100 + 400 + 900 + 1600 == 3000 (ms)
   t.true(endTime - startTime > 3000);
   t.true(endTime - startTime < 3200);
+});
+
+test("rejects when timeout is set", async t => {
+  const startTime = Date.now();
+
+  const executor = new Executor(() => {
+    return new Promise((_, j) => setTimeout(() => j("impossible"), 1000));
+  }, {
+    maxTries: 1000000000000,
+    timeout:  2000,
+  });
+
+  const reason = await t.throws(executor.execute());
+
+  t.true(reason instanceof Error);
+
+  const endTime = Date.now();
+
+  t.true(endTime - startTime > 2000);
+  t.true(endTime - startTime < 2200);
 });
