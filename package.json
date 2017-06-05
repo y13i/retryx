@@ -1,6 +1,6 @@
 {
   "name": "retryx",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Promise-based retry workflow library.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,9 @@
   "keywords": [
     "retry",
     "promise",
-    "backoff"
+    "backoff",
+    "error handling",
+    "timeout"
   ],
   "author": {
     "name": "Yoriki Yamaguchi",
