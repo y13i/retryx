@@ -1,6 +1,6 @@
 # retryx
 
-[![NPM Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/retryx)
+[![NPM Version](https://img.shields.io/npm/v/retryx.svg)](https://www.npmjs.com/package/retryx)
 [![Build Status](https://travis-ci.org/y13i/retryx.svg?branch=master)](https://travis-ci.org/y13i/retryx)
 [![Coverage Status](https://coveralls.io/repos/github/y13i/retryx/badge.svg?branch=master)](https://coveralls.io/github/y13i/retryx?branch=master)
 
