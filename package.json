@@ -40,7 +40,7 @@
     "ava": "^0.19.1",
     "concurrently": "^3.4.0",
     "coveralls": "^2.13.1",
-    "nyc": "^10.3.2",
+    "nyc": "^11.0.2",
     "publish-please": "^2.3.1",
     "sinon": "^2.3.1",
     "tslint": "^5.3.2",
