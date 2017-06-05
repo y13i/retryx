@@ -24,7 +24,7 @@ $ npm install --save retryx
 #### `retryx`
 
 ```javascript
-retryx(main, options, ...args)
+retryx(main [, options [, ...args]])
 ```
 
 `main` is a function returns Promise that might be rejected. **Required**
@@ -38,7 +38,8 @@ retryx(main, options, ...args)
 ```javascript
 {
   maxTries:       number,
-  waiter:         HookFunction, 
+  timeout:        number,
+  waiter:         HookFunction,
   retryCondition: HookFunction,
   beforeTry:      HookFunction,
   afterTry:       HookFunction,
@@ -54,7 +55,17 @@ retryx(main, options, ...args)
 
 Attempts calling main function specified times or until succeeds.
 
-default: 5
+Set `-1` to retry unlimitedly.
+
+default: `5`
+
+##### `timeout`
+
+Sets the timeout.
+
+Set `-1` to no timeout.
+
+default: `-1`
 
 ##### `waiter`
 
