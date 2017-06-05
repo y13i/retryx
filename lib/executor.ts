@@ -16,7 +16,7 @@ export interface ExecutorOptions {
 }
 
 export interface ExecutorInterface<T> {
-  execute(...args: any[]): Promise<T>;
+  execute(): Promise<T>;
 }
 
 export class Executor<T> implements ExecutorInterface<T> {
