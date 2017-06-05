@@ -5,6 +5,7 @@ export type HookFunction    = (tries?: number, reason?: any) => Promise<any> | a
 
 export interface ExecutorOptions {
   maxTries?:       number;
+  timeout?:        number;
   waiter?:         HookFunction;
   retryCondition?: HookFunction;
   beforeTry?:      HookFunction;
@@ -15,17 +16,21 @@ export interface ExecutorOptions {
 }
 
 export interface ExecutorInterface<T> {
-  execute(...args: any[]): Promise<T>;
+  execute(): Promise<T>;
 }
 
 export class Executor<T> implements ExecutorInterface<T> {
   protected static defaultMaxTries:       number       = 5;
+  protected static defaultTimeout:        number       = -1;
   protected static defaultRetryCondition: HookFunction = () => true;
   protected static defaultWaiter:         HookFunction = (tries: number) => wait(100 * tries ** 2);
 
   protected maxTries:       number       = Executor.defaultMaxTries;
+  protected timeout:        number       = Executor.defaultTimeout;
   protected retryCondition: HookFunction = Executor.defaultRetryCondition;
   protected waiter:         HookFunction = Executor.defaultWaiter;
+
+  protected args: any[];
 
   protected beforeTry?:  HookFunction;
   protected afterTry?:   HookFunction;
@@ -36,9 +41,13 @@ export class Executor<T> implements ExecutorInterface<T> {
   constructor(
     protected main:     MainFunction<T>,
     protected options?: ExecutorOptions,
+              ...args:  any[],
   ) {
+    this.args = args;
+
     if (options) {
       if (options.maxTries)       this.maxTries       = options.maxTries;
+      if (options.timeout)        this.timeout        = options.timeout;
       if (options.retryCondition) this.retryCondition = options.retryCondition;
       if (options.waiter)         this.waiter         = options.waiter;
       if (options.beforeTry)      this.beforeTry      = options.beforeTry;
@@ -49,42 +58,54 @@ export class Executor<T> implements ExecutorInterface<T> {
     }
   }
 
-  async execute(...args: any[]): Promise<T> {
-    let successful: boolean = false;
-    let result:     T       = <any>undefined;
+  async execute(): Promise<T> {
+    const promises: Promise<T>[] = [this.tryLoop()];
 
-    loop: {
-      for (let tries = 1; tries <= this.maxTries; tries++) {
-        try {
-          if (this.beforeTry) await this.beforeTry(tries, result);
+    if (this.timeout && this.timeout !== -1) promises.push(<Promise<never>>this.timer(this.timeout));
 
-          result     = await this.main(...args);
-          successful = true;
+    try {
+      const result = await Promise.race(promises);
+      return result;
+    } catch (reason) {
+      throw reason;
+    } finally {
+      if (this.doFinally) await this.doFinally();
+    }
+  }
 
-          if (this.afterTry) await this.afterTry(tries, result);
+  protected async tryLoop(): Promise<T> {
+    let result: T = <any>undefined;
 
-          break loop;
-        } catch (reason) {
-          result = reason;
+    for (let tries = 1; this.maxTries === -1 || tries <= this.maxTries; tries++) {
+      try {
+        if (this.beforeTry) await this.beforeTry(tries, result);
 
-          if (this.afterTry) await this.afterTry(tries, result);
+        result = await this.main(...this.args);
 
-          if (tries === this.maxTries || !(await this.retryCondition(tries, result))) break loop;
+        if (this.afterTry) await this.afterTry(tries, result);
 
-          if (this.beforeWait) await this.beforeWait(tries, result);
-          if (this.waiter) await this.waiter(tries, result);
-          if (this.afterWait) await this.afterWait(tries, result);
-        }
+        break;
+      } catch (reason) {
+        if (this.afterTry) await this.afterTry(tries, reason);
+
+        if (false
+          || tries === this.maxTries
+          || !(await this.retryCondition(tries, reason))
+        ) throw reason;
+
+        if (this.beforeWait) await this.beforeWait(tries, reason);
+        if (this.waiter) await this.waiter(tries, reason);
+        if (this.afterWait) await this.afterWait(tries, reason);
       }
     }
 
-    if (this.doFinally) await this.doFinally();
+    return result;
+  }
 
-    if (successful) {
-      return result;
-    } else {
-      throw result;
-    }
+  protected async timer(duration: number): Promise<void> {
+    await new Promise((_, reject) => {
+      setTimeout(() => reject(new Error("timeout")), duration);
+    });
   }
 }
 
