@@ -112,6 +112,19 @@ Hook function called ONCE whether main function resolved or rejected.
 
 default: nothing to do
 
+### Creating an instance
+
+You can create a new instance of retryx with a custom config.
+
+`retryx.create(options)`
+
+```javascript
+const myRetryx = retryx.create({
+  maxTries: 100,
+  waiter:   () => new Promise(r => setTimeout(r, 10)),
+});
+```
+
 ### Examples
 
 #### With [AWS SDK](https://github.com/aws/aws-sdk-js)
