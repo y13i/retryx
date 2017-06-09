@@ -3,6 +3,10 @@
   "version": "0.0.5",
   "description": "Promise-based retry workflow library.",
   "main": "index.js",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "scripts": {
     "prepublish": "publish-please guard",
     "postpublish": "npm run clean",
