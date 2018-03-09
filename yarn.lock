@@ -73,7 +73,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/sinon@^2.2.2":
+"@types/sinon@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.0.tgz#2cd3a0d53991d7a7b2a9179633c2a73795d853b6"
 
@@ -281,7 +281,7 @@ ava-init@^0.2.0:
     read-pkg-up "^2.0.0"
     write-pkg "^2.0.0"
 
-ava@^0.19.1:
+ava@0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/ava/-/ava-0.19.1.tgz#43dd82435ad19b3980ffca2488f05daab940b273"
   dependencies:
@@ -1025,7 +1025,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-concurrently@^3.4.0:
+concurrently@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-3.4.0.tgz#60662b3defde07375bae19aac0ab780ec748ba79"
   dependencies:
@@ -1090,7 +1090,7 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-coveralls@^2.13.1:
+coveralls@2.13.1:
   version "2.13.1"
   resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-2.13.1.tgz#d70bb9acc1835ec4f063ff9dac5423c17b11f178"
   dependencies:
@@ -2674,7 +2674,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nyc@^11.0.2:
+nyc@11.0.2:
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/nyc/-/nyc-11.0.2.tgz#9e592a697186028253b668516c38f079c39c08f3"
   dependencies:
@@ -3023,7 +3023,7 @@ pseudomap@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-publish-please@^2.3.1:
+publish-please@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-2.3.1.tgz#2906c128fe1fd6b8c6ecb5f12bb90d0e4265a965"
   dependencies:
@@ -3418,7 +3418,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-sinon@^2.3.1:
+sinon@2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/sinon/-/sinon-2.3.2.tgz#c43a9c570f32baac1159505cfeed19108855df89"
   dependencies:
@@ -3738,7 +3738,7 @@ tslib@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
 
-tslint@^5.3.2:
+tslint@5.4.2:
   version "5.4.2"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.4.2.tgz#609b6640cc0424f4a395a9adf68c375563c549c7"
   dependencies:
@@ -3779,7 +3779,7 @@ typedoc-default-themes@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.5.0.tgz#6dc2433e78ed8bea8e887a3acde2f31785bd6227"
 
-typedoc@^0.7.1:
+typedoc@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.7.1.tgz#b441bffe246bb3e0e598d9ae474e743594bda769"
   dependencies:
@@ -3805,7 +3805,7 @@ typescript@2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.2.tgz#f0f045e196f69a72f06b25fd3bd39d01c3ce9984"
 
-typescript@^2.3.3:
+typescript@2.3.4:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.4.tgz#3d38321828231e434f287514959c37a82b629f42"
 
