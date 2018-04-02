@@ -3498,9 +3498,9 @@ pseudomap@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-publish-please@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-2.3.1.tgz#2906c128fe1fd6b8c6ecb5f12bb90d0e4265a965"
+publish-please@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-2.4.1.tgz#caf1cfb118db11bcbd39d63878b9a0509988486d"
   dependencies:
     ban-sensitive-files "^1.7.2"
     chalk "^1.1.1"
