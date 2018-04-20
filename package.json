@@ -52,6 +52,6 @@
     "sinon": "5.0.0",
     "tslint": "5.9.1",
     "typedoc": "0.11.1",
-    "typescript": "2.8.1"
+    "typescript": "2.8.3"
   }
 }
