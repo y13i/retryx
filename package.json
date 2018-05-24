@@ -49,7 +49,7 @@
     "coveralls": "3.0.1",
     "nyc": "11.8.0",
     "publish-please": "2.4.1",
-    "sinon": "5.0.8",
+    "sinon": "5.0.9",
     "tslint": "5.10.0",
     "typedoc": "0.11.1",
     "typescript": "2.8.3"
