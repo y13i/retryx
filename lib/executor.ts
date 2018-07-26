@@ -41,7 +41,7 @@ export class Executor<T> implements ExecutorInterface<T> {
   constructor(
     protected main:     MainFunction<T>,
     protected options?: ExecutorOptions,
-              ...args:  any[],
+              ...args:  any[]
   ) {
     this.args = args;
 
