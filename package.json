@@ -47,7 +47,7 @@
     "ava": "0.25.0",
     "concurrently": "3.6.1",
     "coveralls": "3.0.2",
-    "nyc": "11.8.0",
+    "nyc": "11.9.0",
     "publish-please": "3.2.0",
     "sinon": "6.1.4",
     "tslint": "5.11.0",
