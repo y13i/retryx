@@ -230,6 +230,6 @@ test("rejects when timeout is set", async t => {
 
   const endTime = Date.now();
 
-  t.true(endTime - startTime > 2000);
+  t.true(endTime - startTime >= 2000);
   t.true(endTime - startTime < 2200);
 });
