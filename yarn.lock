@@ -1304,7 +1304,7 @@ coveralls@3.0.2:
     minimist "^1.2.0"
     request "^2.85.0"
 
-cp-sugar@^1.0.0:
+cp-sugar@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cp-sugar/-/cp-sugar-1.0.0.tgz#1c26f9bdca1c03cf6af744a655239ff931ccab6f"
   dependencies:
@@ -1789,20 +1789,13 @@ fsevents@^1.0.0:
     nan "^2.3.0"
     node-pre-gyp "^0.6.29"
 
-fstream-ignore@^1.0.0, fstream-ignore@^1.0.5:
+fstream-ignore@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/fstream-ignore/-/fstream-ignore-1.0.5.tgz#9c31dae34767018fe1d249b24dada67d092da105"
   dependencies:
     fstream "^1.0.0"
     inherits "2"
     minimatch "^3.0.0"
-
-fstream-npm@^1.0.7:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/fstream-npm/-/fstream-npm-1.2.1.tgz#08c4a452f789dcbac4c89a4563c902b2c862fd5b"
-  dependencies:
-    fstream-ignore "^1.0.0"
-    inherits "2"
 
 fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
   version "1.0.11"
@@ -2720,7 +2713,11 @@ lodash.toarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
 
-lodash@4.17.10, lodash@^4.17.10:
+lodash@4.17.11:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+
+lodash@^4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -3353,7 +3350,7 @@ pinkie-promise@^1.0.0:
   dependencies:
     pinkie "^1.0.0"
 
-pinkie-promise@^2.0.0, pinkie-promise@^2.0.1:
+pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
   dependencies:
@@ -3385,14 +3382,6 @@ pkg-dir@^3.0.0:
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-3.0.0.tgz#2749020f239ed990881b1f71210d51eb6523bea3"
   dependencies:
     find-up "^3.0.0"
-
-pkgd@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/pkgd/-/pkgd-1.1.2.tgz#69aba6c7292bd2cf03ba7f3e2eaa81c9d3a3e469"
-  dependencies:
-    fstream-npm "^1.0.7"
-    normalize-path "^2.0.1"
-    pinkie-promise "^2.0.1"
 
 plur@^2.0.0, plur@^2.1.2:
   version "2.1.2"
@@ -3447,23 +3436,19 @@ pseudomap@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-publish-please@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-5.0.0.tgz#b83b6136cfaa7c90f851992634e6a8c3bdafa70a"
+publish-please@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-5.1.0.tgz#89dba432ca627d8209b1a8ed5c23a536d20146ba"
   dependencies:
     chalk "2.4.1"
-    cp-sugar "^1.0.0"
+    cp-sugar "1.0.0"
     elegant-status "1.1.0"
     inquirer "6.2.0"
-    lodash "4.17.10"
+    lodash "4.17.11"
     micromatch "3.1.10"
     node-emoji "1.8.1"
     osenv "0.1.5"
-    pinkie-promise "^2.0.1"
-    pkgd "^1.1.2"
-    promisify-event "^1.0.0"
-    read-pkg "3.0.0"
-    semver "5.5.0"
+    semver "5.6.0"
 
 punycode@^1.4.1:
   version "1.4.1"
@@ -3514,14 +3499,6 @@ read-pkg-up@^4.0.0:
     find-up "^3.0.0"
     read-pkg "^3.0.0"
 
-read-pkg@3.0.0, read-pkg@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-3.0.0.tgz#9cbc686978fee65d16c00e2b19c237fcf6e38389"
-  dependencies:
-    load-json-file "^4.0.0"
-    normalize-package-data "^2.3.2"
-    path-type "^3.0.0"
-
 read-pkg@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-1.1.0.tgz#f5ffaa5ecd29cb31c0474bca7d756b6bb29e3f28"
@@ -3537,6 +3514,14 @@ read-pkg@^2.0.0:
     load-json-file "^2.0.0"
     normalize-package-data "^2.3.2"
     path-type "^2.0.0"
+
+read-pkg@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-3.0.0.tgz#9cbc686978fee65d16c00e2b19c237fcf6e38389"
+  dependencies:
+    load-json-file "^4.0.0"
+    normalize-package-data "^2.3.2"
+    path-type "^3.0.0"
 
 read-pkg@^4.0.1:
   version "4.0.1"
@@ -3835,7 +3820,11 @@ semver-diff@^2.0.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
-semver@5.5.0, semver@^5.4.1, semver@^5.5.0:
+semver@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
+
+semver@^5.4.1, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
