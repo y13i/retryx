@@ -3436,9 +3436,9 @@ pseudomap@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-publish-please@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-5.1.0.tgz#89dba432ca627d8209b1a8ed5c23a536d20146ba"
+publish-please@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/publish-please/-/publish-please-5.1.1.tgz#c12b62d99b961c65fbeedc5182f90538352aad50"
   dependencies:
     chalk "2.4.1"
     cp-sugar "1.0.0"
