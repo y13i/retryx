@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/sinon": "5.0.6",
     "ava": "0.25.0",
-    "concurrently": "4.0.1",
+    "concurrently": "4.1.0",
     "coveralls": "3.0.2",
     "nyc": "13.1.0",
     "publish-please": "5.2.0",
