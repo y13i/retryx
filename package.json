@@ -51,7 +51,7 @@
     "publish-please": "5.2.0",
     "sinon": "7.0.0",
     "tslint": "5.12.1",
-    "typedoc": "0.14.1",
+    "typedoc": "0.14.2",
     "typescript": "3.2.1"
   }
 }
