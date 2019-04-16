@@ -50,7 +50,7 @@
     "nyc": "13.3.0",
     "publish-please": "5.2.0",
     "sinon": "7.0.0",
-    "tslint": "5.15.0",
+    "tslint": "5.16.0",
     "typedoc": "0.14.2",
     "typescript": "3.2.1"
   }
