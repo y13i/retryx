@@ -43,13 +43,13 @@
   },
   "homepage": "https://github.com/y13i/retryx#readme",
   "devDependencies": {
-    "@types/sinon": "5.0.7",
+    "@types/sinon": "10.0.0",
     "ava": "0.25.0",
     "concurrently": "4.1.0",
     "coveralls": "3.0.3",
     "nyc": "14.1.1",
     "publish-please": "5.2.0",
-    "sinon": "7.0.0",
+    "sinon": "10.0.0",
     "tslint": "5.17.0",
     "typedoc": "0.14.2",
     "typescript": "3.2.1"
