@@ -208,10 +208,10 @@ test("exponential backoff from 100ms by default", async t => {
 
   const endTime = Date.now();
 
-  // 1st -> 100ms -> 2nd -> 400ms -> 3rd -> 800ms -> 4th -> 1600ms -> 5th -> reject
-  // 100 + 400 + 800 + 1600 == 2900 (ms)
-  t.true(endTime - startTime > 2900);
-  t.true(endTime - startTime < 3100);
+  // 1st -> 200ms -> 2nd -> 400ms -> 3rd -> 800ms -> 4th -> 1600ms -> 5th -> reject
+  // 200 + 400 + 800 + 1600 == 3000 (ms)
+  t.true(endTime - startTime > 3000);
+  t.true(endTime - startTime < 3200);
 });
 
 test("rejects when timeout is set", async t => {
