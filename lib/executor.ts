@@ -23,7 +23,7 @@ export class Executor<T> implements ExecutorInterface<T> {
   protected static defaultMaxTries:       number       = 5;
   protected static defaultTimeout:        number       = -1;
   protected static defaultRetryCondition: HookFunction = () => true;
-  protected static defaultWaiter:         HookFunction = (tries: number) => wait(100 * tries ** 2);
+  protected static defaultWaiter:         HookFunction = (tries: number) => wait(100 * 2 ** tries);
 
   protected maxTries:       number       = Executor.defaultMaxTries;
   protected timeout:        number       = Executor.defaultTimeout;
