@@ -1,6 +1,6 @@
 {
   "name": "retryx",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Promise-based retry workflow library.",
   "main": "index.js",
   "files": [
