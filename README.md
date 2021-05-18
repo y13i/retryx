@@ -72,9 +72,9 @@ default: `-1`
 
 Hook function called before each retry. It's meant to return a Promise that resolves after specific duration.
 
-default: exponential backoff. 100ms, 400ms, 900ms, 1600ms and so on.
+default: exponential backoff. 200ms, 400ms, 800ms, 1600ms and so on.
 
-See [default waiter implementation](lib/executor.ts#L24). You can create custom waiter with [wait function](lib/wait.ts) for shorthand.
+See [default waiter implementation](lib/executor.ts#L26). You can create custom waiter with [wait function](lib/wait.ts) for shorthand.
 
 ##### `retryCondition`
 
