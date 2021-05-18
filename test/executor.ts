@@ -1,14 +1,14 @@
 import test from "ava";
-import {spy, assert} from "sinon";
+import { spy, assert } from "sinon";
 import Executor from "../lib/executor";
 import wait from "../lib/wait";
 
-test("Executor is a class", t => {
+test("Executor is a class", (t) => {
   const executor = new Executor(() => Promise.resolve());
   t.true(executor instanceof Executor);
 });
 
-test("returns promise", async t => {
+test("returns promise", async (t) => {
   const executor1 = new Executor(() => Promise.resolve("abc"));
   const executor2 = new Executor(() => "def");
 
@@ -21,7 +21,7 @@ test("returns promise", async t => {
   t.is(await promise2, "def");
 });
 
-test("retries until succeeds", async t => {
+test("retries until succeeds", async (t) => {
   let i = 0;
   const theSpy = spy();
 
@@ -30,7 +30,8 @@ test("retries until succeeds", async t => {
       theSpy();
       i++;
 
-      if (i > 3) { // succeeds at 4th trial
+      if (i > 3) {
+        // succeeds at 4th trial
         resolve("success");
       } else {
         reject("fail");
@@ -42,22 +43,25 @@ test("retries until succeeds", async t => {
   t.is(theSpy.callCount, 4);
 });
 
-test("accept maxTries value via options", async t => {
+test("accept maxTries value via options", async (t) => {
   let i = 0;
   const theSpy = spy();
 
-  const executor = new Executor(async () => {
-    theSpy();
-    i++;
+  const executor = new Executor(
+    async () => {
+      theSpy();
+      i++;
 
-    if (i > 3) {
-      return "success";
-    } else {
-      throw "fail";
+      if (i > 3) {
+        return "success";
+      } else {
+        throw "fail";
+      }
+    },
+    {
+      maxTries: 2,
     }
-  }, {
-    maxTries: 2,
-  });
+  );
 
   const result = await t.throws(executor.execute());
 
@@ -65,7 +69,7 @@ test("accept maxTries value via options", async t => {
   t.is(theSpy.callCount, 2);
 });
 
-test("tries 5 times by default", async t => {
+test("tries 5 times by default", async (t) => {
   const counter = spy();
 
   const executor = new Executor(() => {
@@ -78,24 +82,28 @@ test("tries 5 times by default", async t => {
   t.is(counter.callCount, 5);
 });
 
-test("accept custom waiter via options", async t => {
+test("accept custom waiter via options", async (t) => {
   const startAt = Date.now();
 
   let i = 0;
 
-  const executor = new Executor(() => {
-    return new Promise((resolve, reject) => {
-      i++;
+  const executor = new Executor(
+    () => {
+      return new Promise((resolve, reject) => {
+        i++;
 
-      if (i > 2) { // succeeds when 3rd trial
-        resolve("success");
-      } else {
-        reject("fail");
-      }
-    });
-  }, {
-    waiter: () => wait(1000), // wait 1000 ms per retry.
-  });
+        if (i > 2) {
+          // succeeds when 3rd trial
+          resolve("success");
+        } else {
+          reject("fail");
+        }
+      });
+    },
+    {
+      waiter: () => wait(1000), // wait 1000 ms per retry.
+    }
+  );
 
   await executor.execute();
 
@@ -105,25 +113,28 @@ test("accept custom waiter via options", async t => {
   t.true(endAt - startAt < 3000);
 });
 
-test("accept retryCondition value via options", async t => {
+test("accept retryCondition value via options", async (t) => {
   let i = 0;
   const theSpy = spy();
 
-  const executor = new Executor(async () => {
-    theSpy();
-    i++;
+  const executor = new Executor(
+    async () => {
+      theSpy();
+      i++;
 
-    if (i > 3) {
-      return "success";
-    } else if (i === 2) {
-      throw "fatal";
-    } else {
-      throw "fail";
+      if (i > 3) {
+        return "success";
+      } else if (i === 2) {
+        throw "fatal";
+      } else {
+        throw "fail";
+      }
+    },
+    {
+      // stop retrying if "fatal"
+      retryCondition: (_tries: number, reason: any) => reason !== "fatal",
     }
-  }, {
-    // stop retrying if "fatal"
-    retryCondition: (_tries: number, reason: any) => reason !== "fatal",
-  });
+  );
 
   const result = await t.throws(executor.execute());
 
@@ -131,28 +142,32 @@ test("accept retryCondition value via options", async t => {
   t.is(theSpy.callCount, 2);
 });
 
-test("accept before/after try/wait hooks via options", async t => {
-  const byBeforeTry  = spy();
-  const byAfterTry   = spy();
+test("accept before/after try/wait hooks via options", async (t) => {
+  const byBeforeTry = spy();
+  const byAfterTry = spy();
   const byBeforeWait = spy();
-  const byAfterWait  = spy();
+  const byAfterWait = spy();
 
   let i = 0;
 
-  const executor = new Executor(async () => {
-    i++;
+  const executor = new Executor(
+    async () => {
+      i++;
 
-    if (i > 2) { // succeeds when 3rd trial
-      return "success";
-    } else {
-      throw "fail";
+      if (i > 2) {
+        // succeeds when 3rd trial
+        return "success";
+      } else {
+        throw "fail";
+      }
+    },
+    {
+      beforeTry: () => byBeforeTry(),
+      afterTry: async () => byAfterTry(),
+      beforeWait: async () => byBeforeWait(),
+      afterWait: () => byAfterWait(),
     }
-  }, {
-    beforeTry:  () => byBeforeTry(),
-    afterTry:   async () => byAfterTry(),
-    beforeWait: async () => byBeforeWait(),
-    afterWait:  () => byAfterWait(),
-  });
+  );
 
   await executor.execute();
 
@@ -162,11 +177,15 @@ test("accept before/after try/wait hooks via options", async t => {
   t.is(byAfterWait.callCount, 2);
 });
 
-test("accept doFinally hook via options", async t => {
+test("accept doFinally hook via options", async (t) => {
   const spy1 = spy();
   const spy2 = spy();
-  const executor1 = new Executor(() => Promise.resolve(1), {doFinally: () => spy1()});
-  const executor2 = new Executor(() => Promise.reject(2), {doFinally: () => spy2()});
+  const executor1 = new Executor(() => Promise.resolve(1), {
+    doFinally: () => spy1(),
+  });
+  const executor2 = new Executor(() => Promise.reject(2), {
+    doFinally: () => spy2(),
+  });
   t.is(await executor1.execute(), 1);
   t.is(await t.throws(executor2.execute()), 2);
   t.true(spy1.calledOnce);
@@ -176,12 +195,15 @@ test("accept doFinally hook via options", async t => {
   const spy4 = spy();
   const spy5 = spy();
 
-  const executor3 = new Executor(() => {
-    spy3("in-main");
-    return Promise.resolve(33);
-  }, {
-    doFinally: () => spy4("doFinally"),
-  });
+  const executor3 = new Executor(
+    () => {
+      spy3("in-main");
+      return Promise.resolve(33);
+    },
+    {
+      doFinally: () => spy4("doFinally"),
+    }
+  );
 
   const result3 = await executor3.execute();
   spy5("after retryx");
@@ -190,14 +212,23 @@ test("accept doFinally hook via options", async t => {
   assert.callOrder(spy3, spy4, spy5);
 });
 
-test("accept args to main function", async t => {
-  const executor1 = new Executor(arg => Promise.resolve(arg), undefined, "test!");
+test("accept args to main function", async (t) => {
+  const executor1 = new Executor(
+    (arg) => Promise.resolve(arg),
+    undefined,
+    "test!"
+  );
   t.is(await executor1.execute(), "test!");
-  const executor2 = new Executor((...args: any[]) => Promise.resolve([...args]), undefined, "TEST", 123);
+  const executor2 = new Executor(
+    (...args: any[]) => Promise.resolve([...args]),
+    undefined,
+    "TEST",
+    123
+  );
   t.deepEqual(await executor2.execute(), ["TEST", 123]);
 });
 
-test("exponential backoff from 100ms by default", async t => {
+test("exponential backoff from 100ms by default", async (t) => {
   const startTime = Date.now();
 
   const executor = new Executor(() => {
@@ -214,15 +245,18 @@ test("exponential backoff from 100ms by default", async t => {
   t.true(endTime - startTime < 3200);
 });
 
-test("rejects when timeout is set", async t => {
+test("rejects when timeout is set", async (t) => {
   const startTime = Date.now();
 
-  const executor = new Executor(() => {
-    return new Promise((_, j) => setTimeout(() => j("impossible"), 1000));
-  }, {
-    maxTries: 1000000000000,
-    timeout:  2000,
-  });
+  const executor = new Executor(
+    () => {
+      return new Promise((_, j) => setTimeout(() => j("impossible"), 1000));
+    },
+    {
+      maxTries: 1000000000000,
+      timeout: 2000,
+    }
+  );
 
   const reason = await t.throws(executor.execute());
 
