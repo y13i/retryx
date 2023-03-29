@@ -46,7 +46,7 @@
     "@types/node": "18.15.10",
     "@types/sinon": "10.0.13",
     "ava": "5.2.0",
-    "concurrently": "7.6.0",
+    "concurrently": "8.0.1",
     "coveralls": "3.1.1",
     "nyc": "15.1.0",
     "publish-please": "5.5.2",
