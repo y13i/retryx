@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/y13i/retryx#readme",
   "devDependencies": {
-    "@types/node": "18.16.14",
+    "@types/node": "20.15.0",
     "@types/sinon": "10.0.15",
     "ava": "5.2.0",
     "concurrently": "8.0.1",
